@@ -1,17 +1,48 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../Components/Navbar'
+import { useNavigate } from 'react-router-dom'
+import { FormContext } from '../Context/FormContext'
 
-const Experience = () => {    //back and save next button add kro
+const Experience = () => {
+    const { formdata, setformdata } = useContext(FormContext)
+    const Navigate = useNavigate()
+
+
+    const HandleInputChange = (e) => {
+        e.preventDefault()
+        const { name, value } = e.target;
+        setformdata((prevData) => ({
+            ...prevData,
+            experience: {
+                ...prevData.experience,
+                [name]: value,
+            },
+        }));
+        console.log(name, value); // Debugging individual inputs
+    }
+
+    const HandleBackForExp = () => {
+        Navigate("/projects")
+    }
+
+    const HandleNextForExp = () => {
+        Navigate("/extra")
+        console.log(formdata)
+    }
     return (
         <div className=' flex-col justify-center items-center'>
             <Navbar></Navbar>
-            <h1 className="text-2xl font-bold mb-6">Add Your Experience</h1>
+            <h1 className='text-[6vh]  text-center'>Add Your Experience</h1>
             <div className="flex flex-col space-y-8 justify-center items-center w-full py-4">
                 {/* Experience 1 */}
                 <div className="bg-white p-6 rounded-md shadow-md  space-y-4">
                     <h2 className="text-xl font-semibold">Experience 1</h2>
                     <div className='each-input flex w-[40vw] '>
                         <input
+                            onChange={HandleInputChange}
+                            name='organization1'
+                            value={formdata.experience.organization1}
+
                             type="text"
                             placeholder="Organization Name"
                             className="w-full p-2 border rounded"
@@ -21,6 +52,9 @@ const Experience = () => {    //back and save next button add kro
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='position1'
+                            value={formdata.experience.position1}
                             type="text"
                             placeholder="Position"
                             className="w-full p-2 border rounded"
@@ -31,6 +65,9 @@ const Experience = () => {    //back and save next button add kro
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='duration1'
+                            value={formdata.experience.duration1}
                             type="text"
                             placeholder="Duration (e.g., Jan 2020 - Dec 2022)"
                             className="w-full p-2 border rounded"
@@ -39,6 +76,9 @@ const Experience = () => {    //back and save next button add kro
                     </div>
 
                     <textarea
+                        onChange={HandleInputChange}
+                        name='description1'
+                        value={formdata.experience.description1}
                         placeholder="Description"
                         rows="3"
                         className="w-full p-2 border rounded"
@@ -50,6 +90,9 @@ const Experience = () => {    //back and save next button add kro
                     <h2 className="text-xl font-semibold">Experience 2</h2>
                     <div className='each-input flex w-[40vw] '>
                         <input
+                            onChange={HandleInputChange}
+                            name='organization2'
+                            value={formdata.experience.organization2}
                             type="text"
                             placeholder="Organization Name"
                             className="w-full p-2 border rounded"
@@ -59,6 +102,9 @@ const Experience = () => {    //back and save next button add kro
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='position2'
+                            value={formdata.experience.position2}
                             type="text"
                             placeholder="Position"
                             className="w-full p-2 border rounded"
@@ -69,6 +115,9 @@ const Experience = () => {    //back and save next button add kro
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='duration2'
+                            value={formdata.experience.duration2}
                             type="text"
                             placeholder="Duration (e.g., Jan 2020 - Dec 2022)"
                             className="w-full p-2 border rounded"
@@ -77,6 +126,9 @@ const Experience = () => {    //back and save next button add kro
                     </div>
 
                     <textarea
+                        onChange={HandleInputChange}
+                        name='description2'
+                        value={formdata.experience.description2}
                         placeholder="Description"
                         rows="3"
                         className="w-full p-2 border rounded"
@@ -84,12 +136,10 @@ const Experience = () => {    //back and save next button add kro
                 </div>
 
                 {/* Submit Button */}
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                >
-                    Save Experience
-                </button>
+                <div className='flex gap-[12vw] items-center'>
+                    <button onClick={HandleBackForExp} className='bg-[#FAFFC5]  px-3 py-1 rounded-md'>BACK</button>
+                    <button onClick={HandleNextForExp} className='bg-[#3A3960]   px-3 py-1 rounded-md'>Save & Next</button>
+                </div>
             </div>
 
         </div>

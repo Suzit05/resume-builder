@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../Components/Navbar'
+import { useNavigate } from 'react-router-dom'
+import { FormContext } from '../Context/FormContext'
 
 export const Projects = () => {
+    const { formdata, setformdata } = useContext(FormContext)
+    const Navigate = useNavigate()
+
+    const HandleInputChange = (e) => {
+        const { name, value } = e.target
+        setformdata((prevData) => (
+            { ...prevData, projects: { ...prevData.projects, [name]: value } }
+        ))
+
+        console.log(name, value)
+
+    }
+    const HandleBackForProjects = () => {
+        Navigate("/edu")
+    }
+    const HandleNextForProjects = () => {
+        Navigate("/exp")
+    }
     return (
         <div className='flex-col justify-center items-center '>
 
@@ -13,6 +33,9 @@ export const Projects = () => {
                     <h2 className="text-xl font-semibold">Project 1*</h2>
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='title1'
+                            value={formdata.projects.title1}
                             type="text"
                             placeholder="Project Title"
                             className="w-full p-2 border rounded"
@@ -22,6 +45,9 @@ export const Projects = () => {
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='link1'
+                            value={formdata.projects.link1}
                             type="url"
                             placeholder="Project Link"
                             className="w-full p-2 border rounded"
@@ -30,6 +56,9 @@ export const Projects = () => {
                     </div>
 
                     <textarea
+                        onChange={HandleInputChange}
+                        name='description1'
+                        value={formdata.projects.description1}
                         placeholder="Project Description"
                         rows="3"
                         className="w-full p-2 border rounded"
@@ -41,6 +70,9 @@ export const Projects = () => {
                     <h2 className="text-xl font-semibold">Project 2*</h2>
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='title2'
+                            value={formdata.projects.title2}
                             type="text"
                             placeholder="Project Title"
                             className="w-full p-2 border rounded"
@@ -50,6 +82,9 @@ export const Projects = () => {
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='link2'
+                            value={formdata.projects.link2}
                             type="url"
                             placeholder="Project Link"
                             className="w-full p-2 border rounded"
@@ -58,6 +93,9 @@ export const Projects = () => {
                     </div>
 
                     <textarea
+                        onChange={HandleInputChange}
+                        name='description2'
+                        value={formdata.projects.description2}
                         placeholder="Project Description"
                         rows="3"
                         className="w-full p-2 border rounded"
@@ -69,6 +107,9 @@ export const Projects = () => {
                     <h2 className="text-xl font-semibold">Project 3</h2>
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='title3'
+                            value={formdata.projects.title3}
                             type="text"
                             placeholder="Project Title"
                             className="w-full p-2 border rounded"
@@ -78,6 +119,9 @@ export const Projects = () => {
 
                     <div className='each-input flex '>
                         <input
+                            onChange={HandleInputChange}
+                            name='link3'
+                            value={formdata.projects.link3}
                             type="url"
                             placeholder="Project Link"
                             className="w-full p-2 border rounded"
@@ -86,6 +130,9 @@ export const Projects = () => {
                     </div>
 
                     <textarea
+                        onChange={HandleInputChange}
+                        name='description3'
+                        value={formdata.projects.description3}
                         placeholder="Project Description"
                         rows="3"
                         className="w-full p-2 border rounded"
@@ -94,8 +141,8 @@ export const Projects = () => {
 
                 {/* Submit Button */}
                 <div className='flex gap-[12vw] items-center'>
-                    <button className='bg-[#FAFFC5]  px-3 py-1 rounded-md'>BACK</button>
-                    <button className='bg-[#3A3960]   px-3 py-1 rounded-md'>Save & Next</button>
+                    <button onClick={HandleBackForProjects} className='bg-[#FAFFC5]  px-3 py-1 rounded-md'>BACK</button>
+                    <button onClick={HandleNextForProjects} className='bg-[#3A3960]   px-3 py-1 rounded-md'>Save & Next</button>
                 </div>
 
             </div>
